@@ -8,34 +8,27 @@ import { Badge } from './ui/badge';
 import { motion } from 'framer-motion';
 import { Truck, User, LogOut, Menu, Home, Activity, Car, Users, Map, FileText, IndianRupee, PieChart, Info, ChevronRight, Droplet, Fuel } from 'lucide-react';
 
-// Realistic Truck Wheel SVG Component
+// Simple 2D Truck Wheel SVG Component
 const TruckWheel = ({ className }) => (
-  <svg viewBox="0 0 100 100" className={className} fill="currentColor">
-    {/* Outer tire */}
-    <circle cx="50" cy="50" r="48" fill="#1a1a1a" stroke="#0d0d0d" strokeWidth="2"/>
-    {/* Tire treads */}
-    <circle cx="50" cy="50" r="44" fill="none" stroke="#2a2a2a" strokeWidth="6"/>
-    {/* Inner rim */}
-    <circle cx="50" cy="50" r="32" fill="#333" stroke="#1a1a1a" strokeWidth="2"/>
-    {/* Hub cap */}
-    <circle cx="50" cy="50" r="22" fill="#444" stroke="#333" strokeWidth="1"/>
-    {/* Center bolt pattern */}
-    <circle cx="50" cy="50" r="12" fill="#555"/>
-    <circle cx="50" cy="50" r="6" fill="#222"/>
-    {/* Bolt holes */}
-    <circle cx="50" cy="35" r="3" fill="#222"/>
-    <circle cx="63" cy="43" r="3" fill="#222"/>
-    <circle cx="63" cy="57" r="3" fill="#222"/>
-    <circle cx="50" cy="65" r="3" fill="#222"/>
-    <circle cx="37" cy="57" r="3" fill="#222"/>
-    <circle cx="37" cy="43" r="3" fill="#222"/>
-    {/* Spokes */}
-    <line x1="50" y1="22" x2="50" y2="12" stroke="#333" strokeWidth="4" strokeLinecap="round"/>
-    <line x1="74" y1="36" x2="82" y2="31" stroke="#333" strokeWidth="4" strokeLinecap="round"/>
-    <line x1="74" y1="64" x2="82" y2="69" stroke="#333" strokeWidth="4" strokeLinecap="round"/>
-    <line x1="50" y1="78" x2="50" y2="88" stroke="#333" strokeWidth="4" strokeLinecap="round"/>
-    <line x1="26" y1="64" x2="18" y2="69" stroke="#333" strokeWidth="4" strokeLinecap="round"/>
-    <line x1="26" y1="36" x2="18" y2="31" stroke="#333" strokeWidth="4" strokeLinecap="round"/>
+  <svg viewBox="0 0 100 100" className={className}>
+    {/* Outer tire - black rubber */}
+    <circle cx="50" cy="50" r="48" fill="#1a1a1a"/>
+    {/* Tire tread pattern */}
+    <circle cx="50" cy="50" r="42" fill="none" stroke="#333" strokeWidth="4" strokeDasharray="8 4"/>
+    {/* Wheel rim - silver/gray */}
+    <circle cx="50" cy="50" r="30" fill="#4a4a4a"/>
+    {/* Inner rim highlight */}
+    <circle cx="50" cy="50" r="24" fill="#5a5a5a"/>
+    {/* Hub center */}
+    <circle cx="50" cy="50" r="14" fill="#3a3a3a"/>
+    {/* Center cap */}
+    <circle cx="50" cy="50" r="8" fill="#2a2a2a"/>
+    {/* Spokes - 5 spoke design */}
+    <line x1="50" y1="20" x2="50" y2="36" stroke="#3a3a3a" strokeWidth="8" strokeLinecap="round"/>
+    <line x1="78" y1="41" x2="64" y2="46" stroke="#3a3a3a" strokeWidth="8" strokeLinecap="round"/>
+    <line x1="68" y1="74" x2="58" y2="62" stroke="#3a3a3a" strokeWidth="8" strokeLinecap="round"/>
+    <line x1="32" y1="74" x2="42" y2="62" stroke="#3a3a3a" strokeWidth="8" strokeLinecap="round"/>
+    <line x1="22" y1="41" x2="36" y2="46" stroke="#3a3a3a" strokeWidth="8" strokeLinecap="round"/>
   </svg>
 );
 
@@ -69,52 +62,66 @@ const Header = () => {
   const navLinks = currentUser?.role === 'owner' ? ownerLinks : driverLinks;
 
   const NavLinks = ({ onClick }) => (
-    <nav className="hidden md:flex items-center gap-1 lg:gap-2">
-      {navLinks.map((link) => {
-        const isActive = location.pathname === link.to;
-        return (
-          <Link
-            key={link.to}
-            to={link.to}
-            onClick={onClick}
-            className={`relative flex items-center gap-2 px-3 py-2 rounded-full transition-all duration-300 hover:scale-105 ${
-              isActive 
-                ? 'text-amber-900 font-bold bg-amber-50/80 shadow-inner' 
-                : 'text-stone-600 hover:text-amber-800 hover:bg-stone-100'
-            }`}
+    <nav className="hidden md:flex items-center relative">
+      {/* Navigation container with colorful background */}
+      <div className="flex items-center gap-1 lg:gap-2 px-4 py-2 bg-gradient-to-r from-amber-100 via-orange-50 to-amber-100 rounded-full border border-amber-200/50 shadow-inner">
+        {navLinks.map((link) => {
+          const isActive = location.pathname === link.to;
+          return (
+            <Link
+              key={link.to}
+              to={link.to}
+              onClick={onClick}
+              className={`relative flex items-center gap-2 px-3 py-1.5 rounded-full transition-all duration-300 hover:scale-105 ${
+                isActive 
+                  ? 'text-amber-900 font-bold bg-white shadow-md' 
+                  : 'text-stone-600 hover:text-amber-800 hover:bg-white/60'
+              }`}
+            >
+              <div className="flex items-center gap-2 relative z-10">
+                {link.icon}
+                <span className="text-sm hidden lg:inline-block tracking-tight">{link.label}</span>
+              </div>
+            </Link>
+          );
+        })}
+      </div>
+      
+      {/* Track/Road bar under navigation */}
+      <div className="absolute -bottom-4 left-0 right-0 mx-4">
+        {/* Road surface */}
+        <div className="h-2 bg-gradient-to-r from-stone-300 via-stone-400 to-stone-300 rounded-full shadow-inner" />
+        {/* Road marking dashes */}
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="h-0.5 w-full mx-2 border-t-2 border-dashed border-amber-200/60" />
+        </div>
+        
+        {/* Rolling wheel on the track */}
+        <motion.div
+          layoutId="activeNavWheel"
+          className="absolute -top-2 flex items-center justify-center z-20"
+          style={{ 
+            left: `${(navLinks.findIndex(link => link.to === location.pathname) / navLinks.length) * 100 + (50 / navLinks.length)}%`,
+            x: "-50%"
+          }}
+          transition={{ type: "spring", stiffness: 80, damping: 15, mass: 1 }}
+        >
+          <motion.div
+            animate={{ rotate: 360 }}
+            transition={{ ease: "linear", duration: 1.5, repeat: Infinity }}
+            className="drop-shadow-lg"
           >
-            <div className="flex items-center gap-2 relative z-10">
-              {link.icon}
-              <span className="text-sm hidden lg:inline-block tracking-tight">{link.label}</span>
-            </div>
-            
-            {/* Rolling Truck Wheel Active Indicator */}
-            {isActive && (
-              <motion.div
-                layoutId="activeNavWheel"
-                className="absolute -bottom-5 left-1/2 flex items-center justify-center z-20 drop-shadow-lg"
-                transition={{ type: "spring", stiffness: 60, damping: 18, mass: 1.2 }}
-                style={{ x: "-50%" }}
-              >
-                <motion.div
-                  animate={{ rotate: 360 }}
-                  transition={{ ease: "linear", duration: 2, repeat: Infinity }}
-                  className="drop-shadow-md"
-                >
-                  <TruckWheel className="w-7 h-7" />
-                </motion.div>
-              </motion.div>
-            )}
-          </Link>
-        );
-      })}
+            <TruckWheel className="w-6 h-6" />
+          </motion.div>
+        </motion.div>
+      </div>
     </nav>
   );
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-stone-200 bg-stone-50/90 backdrop-blur-md shadow-sm">
+    <header className="sticky top-0 z-50 w-full border-b border-amber-200 bg-gradient-to-r from-amber-50/95 via-stone-50/95 to-orange-50/95 backdrop-blur-md shadow-sm">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex h-16 items-center justify-between">
+        <div className="flex h-20 items-center justify-between pb-2">
           <div className="flex items-center gap-4 lg:gap-8">
             {/* Mobile Hamburger Menu */}
             {currentUser && (
