@@ -8,8 +8,9 @@ import { Input } from '../components/ui/input';
 import { Label } from '../components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/ui/select';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../components/ui/table';
-import DashboardLayout from '../components/DashboardLayout.jsx';
-import FloatingAddButton from '../components/FloatingAddButton.jsx';
+import { Plus } from 'lucide-react';
+import Header from '../components/Header.jsx';
+import Footer from '../components/Footer.jsx';
 import { toast } from 'sonner';
 
 const FuelLogging = () => {

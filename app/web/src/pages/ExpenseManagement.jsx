@@ -9,8 +9,9 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '.
 import { Textarea } from '../components/ui/textarea';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../components/ui/table';
 import { Badge } from '../components/ui/badge';
-import DashboardLayout from '../components/DashboardLayout.jsx';
-import FloatingAddButton from '../components/FloatingAddButton.jsx';
+import { Plus } from 'lucide-react';
+import Header from '../components/Header.jsx';
+import Footer from '../components/Footer.jsx';
 import { toast } from 'sonner';
 
 const ExpenseManagement = () => {

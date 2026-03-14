@@ -6,10 +6,10 @@ import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { Label } from '../components/ui/label';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../components/ui/table';
-import { Edit, Trash2, MapPin, Truck, Navigation, ExternalLink } from 'lucide-react';
+import { Plus, Edit, Trash2, MapPin, Truck, Navigation, ExternalLink } from 'lucide-react';
 import { motion } from 'framer-motion';
-import DashboardLayout from '../components/DashboardLayout.jsx';
-import FloatingAddButton from '../components/FloatingAddButton.jsx';
+import Header from '../components/Header.jsx';
+import Footer from '../components/Footer.jsx';
 import { toast } from 'sonner';
 
 const DriverManagement = () => {
@@ -135,18 +135,30 @@ const DriverManagement = () => {
         <meta name="description" content="Manage your fleet drivers, assignments, and performance tracking." />
       </Helmet>
       
-      <DashboardLayout>
-        <div className="min-h-screen relative overflow-hidden">
-          {/* Background Gradients */}
-          <div className="absolute inset-0 bg-gradient-to-br from-amber-50/80 via-stone-50 to-orange-50/50 pointer-events-none" />
-          <div className="absolute top-0 right-0 -mt-20 -mr-20 w-96 h-96 bg-amber-300/15 rounded-full blur-[100px] pointer-events-none" />
-          <div className="absolute bottom-0 left-0 -mb-20 -ml-20 w-96 h-96 bg-orange-300/15 rounded-full blur-[100px] pointer-events-none" />
-
-          <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 relative z-10">
-            <div className="mb-8">
+      <div className="min-h-screen flex flex-col bg-stone-50 relative overflow-hidden">
+        {/* Background Gradients */}
+        <div className="absolute inset-0 bg-gradient-to-br from-amber-50/80 via-stone-50 to-orange-50/50 pointer-events-none" />
+        <div className="absolute top-0 right-0 -mt-20 -mr-20 w-96 h-96 bg-amber-300/15 rounded-full blur-[100px] pointer-events-none" />
+        <div className="absolute bottom-0 left-0 -mb-20 -ml-20 w-96 h-96 bg-orange-300/15 rounded-full blur-[100px] pointer-events-none" />
+        
+        <Header className="relative z-20" />
+        
+        <main className="flex-1 container mx-auto px-4 sm:px-6 lg:px-8 py-8 relative z-10">
+          <div className="flex items-center justify-between mb-8">
+            <div>
               <h1 className="text-3xl font-bold mb-2 text-amber-900">Drivers</h1>
               <p className="text-stone-600">Manage your fleet drivers and their details</p>
             </div>
+            
+            <Button 
+              onClick={() => setShowDriverForm(true)} 
+              className="gap-2 bg-amber-700 hover:bg-amber-800 text-white"
+              disabled={showDriverForm}
+            >
+              <Plus className="w-4 h-4" />
+              Add Driver
+            </Button>
+          </div>
 
           {/* Inline Add/Edit Driver Form */}
           {showDriverForm && (
@@ -431,15 +443,10 @@ const DriverManagement = () => {
               </CardContent>
             </Card>
           )}
-          </main>
-
-          {/* Floating Add Button */}
-          <FloatingAddButton 
-            onClick={() => setShowDriverForm(true)} 
-            disabled={showDriverForm}
-          />
-        </div>
-      </DashboardLayout>
+        </main>
+        
+        <Footer />
+      </div>
     </>
   );
 };
