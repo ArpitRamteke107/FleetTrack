@@ -7,11 +7,9 @@
 body {
   font-family: "DM Sans", sans-serif;
   overflow-x: clip;
-  background-color: #f8fafc;
-  background-image: url('/bg/maps_topography.png');
-  background-size: cover;
+  background-color: #fdf2f8;
+  background-image: linear-gradient(135deg, #fdf2f8 0%, #f0f9ff 50%, #faf5ff 100%);
   background-attachment: fixed;
-  background-blend-mode: multiply;
 }
 
 html {
@@ -20,32 +18,32 @@ html {
 
 @layer base {
   :root {
-    --background: 210 40% 98%; /* slate-50 */
-    --foreground: 222 47% 11%;
+    --background: 327 73% 97%; /* rose-50 */
+    --foreground: 222 47% 20%;
     
-    /* Logistics Blue */
-    --primary: 221 83% 53%; 
-    --primary-foreground: 0 0% 100%;
+    /* Soft Sky Blue */
+    --primary: 199 89% 70%; 
+    --primary-foreground: 222 47% 15%;
     
-    --secondary: 210 40% 96.1%;
+    --secondary: 270 67% 94%; /* violet-100 */
     --secondary-foreground: 222.2 47.4% 11.2%;
     
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 72% 75%; /* pastel red */
+    --destructive-foreground: 0 0% 100%;
     
-    --success: 142 71% 45%;
-    --success-foreground: 0 0% 100%;
+    --success: 158 64% 72%; /* pastel emerald */
+    --success-foreground: 158 64% 20%;
     
-    /* Fleet Tracker Amber/Orange Accent */
-    --warning: 38 92% 50%;
-    --warning-foreground: 0 0% 100%;
+    /* Soft Rose Accent */
+    --warning: 350 80% 80%;
+    --warning-foreground: 350 80% 25%;
     
-    --muted: 210 40% 96.1%;
+    --muted: 199 89% 94%; /* sky-100 */
     --muted-foreground: 215.4 16.3% 46.9%;
     
-    /* Fleet Tracker Amber/Orange Accent */
-    --accent: 38 92% 50%;
-    --accent-foreground: 0 0% 100%;
+    /* Soft Violet Accent */
+    --accent: 270 67% 75%;
+    --accent-foreground: 270 67% 20%;
     
     --card: 0 0% 100%;
     --card-foreground: 222.2 47.4% 11.2%;
@@ -53,9 +51,9 @@ html {
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 47.4% 11.2%;
     
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 221 83% 53%;
+    --border: 327 73% 90%; /* rose-200 */
+    --input: 199 89% 92%; /* sky-100 */
+    --ring: 199 89% 70%;
     
     --radius: 0.75rem;
   }
