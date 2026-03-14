@@ -39,23 +39,23 @@ const OwnerDashboard = () => {
 
       const [vehicles, trips, fuel, revenue] = await Promise.all([
         pb.collection('vehicles').getFullList({ $autoCancel: false }),
-        pb.collection('trips').getFullList({ 
+        pb.collection('trips').getFullList({
           filter: `date >= "${today}" && date < "${nextDayStr}"`,
-          $autoCancel: false 
+          $autoCancel: false
         }),
-        pb.collection('fuel').getFullList({ 
+        pb.collection('fuel').getFullList({
           filter: `date >= "${today}" && date < "${nextDayStr}"`,
-          $autoCancel: false 
+          $autoCancel: false
         }),
-        pb.collection('revenue').getFullList({ 
+        pb.collection('revenue').getFullList({
           filter: `date >= "${today}" && date < "${nextDayStr}"`,
-          $autoCancel: false 
+          $autoCancel: false
         })
       ]);
 
       const activeVehicles = vehicles.filter(v => v.status === 'active').length;
       const todayTrips = trips.length;
-      
+
       const materialBreakdown = trips.reduce((acc, trip) => {
         acc[trip.material_type] = (acc[trip.material_type] || 0) + 1;
         return acc;
@@ -103,13 +103,13 @@ const OwnerDashboard = () => {
         const nextDateStr = nextDate.toISOString().split('T')[0];
 
         const [dayRevenue, dayFuel] = await Promise.all([
-          pb.collection('revenue').getFullList({ 
+          pb.collection('revenue').getFullList({
             filter: `date >= "${dateStr}" && date < "${nextDateStr}"`,
-            $autoCancel: false 
+            $autoCancel: false
           }),
-          pb.collection('fuel').getFullList({ 
+          pb.collection('fuel').getFullList({
             filter: `date >= "${dateStr}" && date < "${nextDateStr}"`,
-            $autoCancel: false 
+            $autoCancel: false
           })
         ]);
 
