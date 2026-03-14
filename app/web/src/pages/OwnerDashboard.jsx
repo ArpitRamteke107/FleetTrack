@@ -39,23 +39,23 @@ const OwnerDashboard = () => {
 
       const [vehicles, trips, fuel, revenue] = await Promise.all([
         pb.collection('vehicles').getFullList({ $autoCancel: false }),
-        pb.collection('trips').getFullList({ 
+        pb.collection('trips').getFullList({
           filter: `date >= "${today}" && date < "${nextDayStr}"`,
-          $autoCancel: false 
+          $autoCancel: false
         }),
-        pb.collection('fuel').getFullList({ 
+        pb.collection('fuel').getFullList({
           filter: `date >= "${today}" && date < "${nextDayStr}"`,
-          $autoCancel: false 
+          $autoCancel: false
         }),
-        pb.collection('revenue').getFullList({ 
+        pb.collection('revenue').getFullList({
           filter: `date >= "${today}" && date < "${nextDayStr}"`,
-          $autoCancel: false 
+          $autoCancel: false
         })
       ]);
 
       const activeVehicles = vehicles.filter(v => v.status === 'active').length;
       const todayTrips = trips.length;
-      
+
       const materialBreakdown = trips.reduce((acc, trip) => {
         acc[trip.material_type] = (acc[trip.material_type] || 0) + 1;
         return acc;
@@ -103,13 +103,13 @@ const OwnerDashboard = () => {
         const nextDateStr = nextDate.toISOString().split('T')[0];
 
         const [dayRevenue, dayFuel] = await Promise.all([
-          pb.collection('revenue').getFullList({ 
+          pb.collection('revenue').getFullList({
             filter: `date >= "${dateStr}" && date < "${nextDateStr}"`,
-            $autoCancel: false 
+            $autoCancel: false
           }),
-          pb.collection('fuel').getFullList({ 
+          pb.collection('fuel').getFullList({
             filter: `date >= "${dateStr}" && date < "${nextDateStr}"`,
-            $autoCancel: false 
+            $autoCancel: false
           })
         ]);
 
@@ -136,7 +136,7 @@ const OwnerDashboard = () => {
         <meta name="description" content="Fleet owner dashboard with real-time vehicle, trip, and revenue analytics." />
       </Helmet>
 
-      <div className="min-h-screen flex flex-col relative overflow-hidden bg-slate-50">
+      <div className="min-h-screen flex flex-col relative overflow-hidden bg-stone-50">
         {/* Topographic map background — visible during loading, fades out on complete */}
         <AnimatePresence>
           {loading && (
@@ -154,9 +154,9 @@ const OwnerDashboard = () => {
         </AnimatePresence>
 
         {/* Decorative blobs (always) */}
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-50/80 via-white/40 to-indigo-50/80 pointer-events-none z-0" />
-        <div className="absolute top-0 right-0 -mt-20 -mr-20 w-96 h-96 bg-blue-400/10 rounded-full blur-[100px] pointer-events-none z-0" />
-        <div className="absolute bottom-0 left-0 -mb-20 -ml-20 w-96 h-96 bg-indigo-500/10 rounded-full blur-[100px] pointer-events-none z-0" />
+        <div className="absolute inset-0 bg-gradient-to-br from-amber-50/80 via-stone-50/40 to-orange-50/80 pointer-events-none z-0" />
+        <div className="absolute top-0 right-0 -mt-20 -mr-20 w-96 h-96 bg-amber-300/15 rounded-full blur-[100px] pointer-events-none z-0" />
+        <div className="absolute bottom-0 left-0 -mb-20 -ml-20 w-96 h-96 bg-orange-300/15 rounded-full blur-[100px] pointer-events-none z-0" />
 
         <Header className="relative z-20" />
 
@@ -164,7 +164,7 @@ const OwnerDashboard = () => {
           {loading ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
               {[1, 2, 3, 4].map(i => (
-                <Card key={i} className="bg-white/80 backdrop-blur-sm border-blue-100/50 shadow-sm">
+                <Card key={i} className="bg-white/80 backdrop-blur-sm border-stone-200 shadow-sm hover:shadow-md transition-shadow duration-300">
                   <CardHeader>
                     <Skeleton className="h-4 w-24" />
                   </CardHeader>
@@ -187,7 +187,7 @@ const OwnerDashboard = () => {
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-                <Card className="hover:shadow-lg transition-all duration-300 bg-white/80 backdrop-blur-sm border-blue-100/50">
+                <Card className="hover:shadow-lg hover:scale-[1.02] transition-all duration-300 bg-white/80 backdrop-blur-sm border-stone-200 hover:border-amber-300">
                   <CardHeader className="flex flex-row items-center justify-between pb-2">
                     <CardTitle className="text-sm font-medium text-muted-foreground">Active Vehicles</CardTitle>
                     <Truck className="w-5 h-5 text-primary" />
@@ -198,7 +198,7 @@ const OwnerDashboard = () => {
                   </CardContent>
                 </Card>
 
-                <Card className="hover:shadow-lg transition-all duration-300 bg-white/80 backdrop-blur-sm border-blue-100/50">
+                <Card className="hover:shadow-lg hover:scale-[1.02] transition-all duration-300 bg-white/80 backdrop-blur-sm border-stone-200 hover:border-amber-300">
                   <CardHeader className="flex flex-row items-center justify-between pb-2">
                     <CardTitle className="text-sm font-medium text-muted-foreground">Today's Trips</CardTitle>
                     <Package className="w-5 h-5 text-primary" />
@@ -211,7 +211,7 @@ const OwnerDashboard = () => {
                   </CardContent>
                 </Card>
 
-                <Card className="hover:shadow-lg transition-all duration-300 bg-white/80 backdrop-blur-sm border-blue-100/50">
+                <Card className="hover:shadow-lg hover:scale-[1.02] transition-all duration-300 bg-white/80 backdrop-blur-sm border-stone-200 hover:border-amber-300">
                   <CardHeader className="flex flex-row items-center justify-between pb-2">
                     <CardTitle className="text-sm font-medium text-muted-foreground">Fuel vs Revenue</CardTitle>
                     <Fuel className="w-5 h-5 text-primary" />
@@ -222,7 +222,7 @@ const OwnerDashboard = () => {
                   </CardContent>
                 </Card>
 
-                <Card className="hover:shadow-lg transition-all duration-300 bg-white/80 backdrop-blur-sm border-blue-100/50">
+                <Card className="hover:shadow-lg hover:scale-[1.02] transition-all duration-300 bg-white/80 backdrop-blur-sm border-stone-200 hover:border-amber-300">
                   <CardHeader className="flex flex-row items-center justify-between pb-2">
                     <CardTitle className="text-sm font-medium text-muted-foreground">Today's Profit</CardTitle>
                     {stats.todayProfit >= 0 ? (
@@ -243,7 +243,7 @@ const OwnerDashboard = () => {
               </div>
 
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-                <Card className="lg:col-span-2 bg-white/80 backdrop-blur-sm border-blue-100/50 shadow-sm">
+                <Card className="lg:col-span-2 bg-white/80 backdrop-blur-sm border-stone-200 shadow-sm hover:shadow-md transition-shadow duration-300">
                   <CardHeader>
                     <CardTitle>Revenue vs Expense (Last 7 Days)</CardTitle>
                   </CardHeader>
@@ -262,7 +262,7 @@ const OwnerDashboard = () => {
                   </CardContent>
                 </Card>
 
-                <Card className="bg-white/80 backdrop-blur-sm border-blue-100/50 shadow-sm">
+                <Card className="bg-white/80 backdrop-blur-sm border-stone-200 shadow-sm hover:shadow-md transition-shadow duration-300">
                   <CardHeader>
                     <CardTitle>Driver Status</CardTitle>
                   </CardHeader>
