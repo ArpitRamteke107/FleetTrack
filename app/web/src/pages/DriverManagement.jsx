@@ -6,7 +6,6 @@ import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { Label } from '../components/ui/label';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../components/ui/table';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '../components/ui/dialog';
 import { Plus, Edit, Trash2, MapPin, Truck, Navigation, ExternalLink } from 'lucide-react';
 import { motion } from 'framer-motion';
 import Header from '../components/Header.jsx';
@@ -16,7 +15,7 @@ import { toast } from 'sonner';
 const DriverManagement = () => {
   const [drivers, setDrivers] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [dialogOpen, setDialogOpen] = useState(false);
+  const [showDriverForm, setShowDriverForm] = useState(false);
   const [editingDriver, setEditingDriver] = useState(null);
   const [formData, setFormData] = useState({
     email: '',
@@ -77,7 +76,7 @@ const DriverManagement = () => {
         toast.success('Driver added successfully');
       }
 
-      setDialogOpen(false);
+      setShowDriverForm(false);
       resetForm();
       fetchDrivers();
     } catch (error) {
@@ -97,7 +96,12 @@ const DriverManagement = () => {
       licence_number: driver.licence_number || '',
       joining_date: driver.joining_date || new Date().toISOString().split('T')[0]
     });
-    setDialogOpen(true);
+    setShowDriverForm(true);
+  };
+
+  const handleCancel = () => {
+    setShowDriverForm(false);
+    resetForm();
   };
 
   const handleDelete = async (id) => {
@@ -142,152 +146,178 @@ const DriverManagement = () => {
         <main className="flex-1 container mx-auto px-4 sm:px-6 lg:px-8 py-8 relative z-10">
           <div className="flex items-center justify-between mb-8">
             <div>
-              <h1 className="text-3xl font-bold mb-2">Driver Management</h1>
-              <p className="text-muted-foreground">Manage your fleet drivers and their details</p>
+              <h1 className="text-3xl font-bold mb-2 text-amber-900">Drivers</h1>
+              <p className="text-stone-600">Manage your fleet drivers and their details</p>
             </div>
             
-            <Dialog open={dialogOpen} onOpenChange={(open) => {
-              setDialogOpen(open);
-              if (!open) resetForm();
-            }}>
-              <DialogTrigger asChild>
-                <Button className="gap-2 bg-amber-800 hover:bg-amber-900 text-stone-100 transition-all duration-300 hover:scale-105 hover:shadow-lg">
-                  <Plus className="w-4 h-4" />
-                  Add Driver
-                </Button>
-              </DialogTrigger>
-              <DialogContent className="max-w-md">
-                <DialogHeader>
-                  <DialogTitle>{editingDriver ? 'Edit Driver' : 'Add New Driver'}</DialogTitle>
-                </DialogHeader>
-                <form onSubmit={handleSubmit} className="space-y-4">
-                  {!editingDriver && (
-                    <>
-                      <div className="space-y-2">
-                        <Label htmlFor="email">Email *</Label>
-                        <Input
-                          id="email"
-                          type="email"
-                          value={formData.email}
-                          onChange={(e) => handleChange('email', e.target.value)}
-                          required
-                          className="text-foreground"
-                        />
-                      </div>
-
-                      <div className="space-y-2">
-                        <Label htmlFor="password">Password *</Label>
-                        <Input
-                          id="password"
-                          type="password"
-                          value={formData.password}
-                          onChange={(e) => handleChange('password', e.target.value)}
-                          required
-                          minLength={8}
-                          className="text-foreground"
-                        />
-                      </div>
-                    </>
-                  )}
-
-                  <div className="space-y-2">
-                    <Label htmlFor="name">Name *</Label>
-                    <Input
-                      id="name"
-                      value={formData.name}
-                      onChange={(e) => handleChange('name', e.target.value)}
-                      required
-                      className="text-foreground"
-                    />
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="phone">Phone</Label>
-                    <Input
-                      id="phone"
-                      type="tel"
-                      value={formData.phone}
-                      onChange={(e) => handleChange('phone', e.target.value)}
-                      className="text-foreground"
-                    />
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="licence_number">Licence Number</Label>
-                    <Input
-                      id="licence_number"
-                      value={formData.licence_number}
-                      onChange={(e) => handleChange('licence_number', e.target.value)}
-                      className="text-foreground"
-                    />
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="joining_date">Joining Date</Label>
-                    <Input
-                      id="joining_date"
-                      type="date"
-                      value={formData.joining_date}
-                      onChange={(e) => handleChange('joining_date', e.target.value)}
-                      className="text-foreground"
-                    />
-                  </div>
-
-                  <Button type="submit" className="w-full" disabled={loading}>
-                    {loading ? 'Saving...' : editingDriver ? 'Update Driver' : 'Add Driver'}
-                  </Button>
-                </form>
-              </DialogContent>
-            </Dialog>
+            <Button 
+              onClick={() => setShowDriverForm(true)} 
+              className="gap-2 bg-amber-700 hover:bg-amber-800 text-white"
+              disabled={showDriverForm}
+            >
+              <Plus className="w-4 h-4" />
+              Add Driver
+            </Button>
           </div>
 
-          <Card className="bg-white/80 backdrop-blur-sm border-stone-200 shadow-sm hover:shadow-md transition-shadow duration-300">
+          {/* Inline Add/Edit Driver Form */}
+          {showDriverForm && (
+            <Card className="mb-8 bg-white border-stone-200 shadow-sm">
+              <CardHeader className="pb-4">
+                <CardTitle className="text-xl text-stone-800">
+                  {editingDriver ? 'Edit driver' : 'Add new driver'}
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <form onSubmit={handleSubmit}>
+                  {/* Driver Details Row */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+                    {!editingDriver && (
+                      <>
+                        <div className="space-y-2">
+                          <Label htmlFor="email" className="text-stone-700">Email *</Label>
+                          <Input
+                            id="email"
+                            type="email"
+                            placeholder="driver@example.com"
+                            value={formData.email}
+                            onChange={(e) => handleChange('email', e.target.value)}
+                            required
+                            className="bg-stone-50 border-stone-200 text-stone-900 placeholder:text-stone-400"
+                          />
+                        </div>
+
+                        <div className="space-y-2">
+                          <Label htmlFor="password" className="text-stone-700">Password *</Label>
+                          <Input
+                            id="password"
+                            type="password"
+                            placeholder="Min 8 characters"
+                            value={formData.password}
+                            onChange={(e) => handleChange('password', e.target.value)}
+                            required
+                            minLength={8}
+                            className="bg-stone-50 border-stone-200 text-stone-900 placeholder:text-stone-400"
+                          />
+                        </div>
+                      </>
+                    )}
+
+                    <div className="space-y-2">
+                      <Label htmlFor="name" className="text-stone-700">Name *</Label>
+                      <Input
+                        id="name"
+                        placeholder="Full name"
+                        value={formData.name}
+                        onChange={(e) => handleChange('name', e.target.value)}
+                        required
+                        className="bg-stone-50 border-stone-200 text-stone-900 placeholder:text-stone-400"
+                      />
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="phone" className="text-stone-700">Phone</Label>
+                      <Input
+                        id="phone"
+                        type="tel"
+                        placeholder="Phone number"
+                        value={formData.phone}
+                        onChange={(e) => handleChange('phone', e.target.value)}
+                        className="bg-stone-50 border-stone-200 text-stone-900 placeholder:text-stone-400"
+                      />
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="licence_number" className="text-stone-700">Licence Number</Label>
+                      <Input
+                        id="licence_number"
+                        placeholder="DL-1234567890"
+                        value={formData.licence_number}
+                        onChange={(e) => handleChange('licence_number', e.target.value)}
+                        className="bg-stone-50 border-stone-200 text-stone-900 placeholder:text-stone-400"
+                      />
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="joining_date" className="text-stone-700">Joining Date</Label>
+                      <Input
+                        id="joining_date"
+                        type="date"
+                        value={formData.joining_date}
+                        onChange={(e) => handleChange('joining_date', e.target.value)}
+                        className="bg-stone-50 border-stone-200 text-stone-900"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Form Actions */}
+                  <div className="flex items-center justify-center gap-3 pt-4 border-t border-stone-200">
+                    <Button
+                      type="button"
+                      variant="outline"
+                      onClick={handleCancel}
+                      className="px-8 border-stone-300 text-stone-700 hover:bg-stone-50"
+                    >
+                      Cancel
+                    </Button>
+                    <Button
+                      type="submit"
+                      disabled={loading}
+                      className="px-8 bg-amber-700 hover:bg-amber-800 text-white"
+                    >
+                      {loading ? 'Saving...' : editingDriver ? 'Update Driver' : 'Save Driver'}
+                    </Button>
+                  </div>
+                </form>
+              </CardContent>
+            </Card>
+          )}
+
+          <Card className="bg-white/80 backdrop-blur-sm border-stone-200 shadow-sm">
             <CardHeader>
-              <CardTitle className="text-amber-900">Fleet Drivers</CardTitle>
+              <CardTitle className="text-amber-900">All drivers</CardTitle>
             </CardHeader>
             <CardContent>
               {drivers.length > 0 ? (
                 <div className="overflow-x-auto">
                   <Table>
                     <TableHeader>
-                      <TableRow className="hover:bg-amber-50/50">
-                        <TableHead className="text-amber-900">Name</TableHead>
-                        <TableHead className="text-amber-900">Email</TableHead>
-                        <TableHead className="text-amber-900">Phone</TableHead>
-                        <TableHead className="text-amber-900">Licence Number</TableHead>
-                        <TableHead className="text-amber-900">Joining Date</TableHead>
-                        <TableHead className="text-amber-900">Location</TableHead>
-                        <TableHead className="text-amber-900">Actions</TableHead>
+                      <TableRow className="hover:bg-transparent">
+                        <TableHead className="text-stone-500 uppercase text-xs font-medium">Name</TableHead>
+                        <TableHead className="text-stone-500 uppercase text-xs font-medium">Email</TableHead>
+                        <TableHead className="text-stone-500 uppercase text-xs font-medium">Phone</TableHead>
+                        <TableHead className="text-stone-500 uppercase text-xs font-medium">Licence</TableHead>
+                        <TableHead className="text-stone-500 uppercase text-xs font-medium">Location</TableHead>
+                        <TableHead className="text-stone-500 uppercase text-xs font-medium">Actions</TableHead>
                       </TableRow>
                     </TableHeader>
                     <TableBody>
                       {drivers.map((driver) => (
-                        <TableRow key={driver.id} className="hover:bg-amber-50/50 transition-colors duration-200">
-                          <TableCell className="font-medium text-stone-800">{driver.name || 'N/A'}</TableCell>
+                        <TableRow key={driver.id} className="hover:bg-stone-50">
+                          <TableCell className="font-medium text-stone-800">{driver.name || '-'}</TableCell>
                           <TableCell className="text-stone-600">{driver.email}</TableCell>
-                          <TableCell className="text-stone-600">{driver.phone || 'N/A'}</TableCell>
-                          <TableCell className="text-stone-600">{driver.licence_number || 'N/A'}</TableCell>
-                          <TableCell className="text-stone-600">{driver.joining_date ? new Date(driver.joining_date).toLocaleDateString() : 'N/A'}</TableCell>
+                          <TableCell className="text-stone-600">{driver.phone || '-'}</TableCell>
+                          <TableCell className="text-stone-600">{driver.licence_number || '-'}</TableCell>
                           <TableCell>
                             {driver.latitude && driver.longitude ? (
                               <a 
                                 href={`https://www.google.com/maps?q=${driver.latitude},${driver.longitude}`} 
                                 target="_blank" 
                                 rel="noopener noreferrer"
-                                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-amber-100 text-amber-800 hover:bg-amber-200 transition-all duration-300 text-sm font-medium hover:scale-105"
+                                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-amber-100 text-amber-800 hover:bg-amber-200 text-sm font-medium"
                               >
-                                <Navigation className="w-3 h-3" /> View Location
+                                <Navigation className="w-3 h-3" /> View
                               </a>
                             ) : (
-                              <span className="text-stone-400 text-xs italic">Not tracking</span>
+                              <span className="text-stone-400 text-xs">Not tracking</span>
                             )}
                           </TableCell>
                           <TableCell>
                             <div className="flex items-center gap-2">
-                              <Button size="sm" variant="ghost" onClick={() => handleEdit(driver)} className="hover:bg-amber-100 hover:text-amber-900 transition-all duration-300 hover:scale-110">
+                              <Button size="sm" variant="ghost" onClick={() => handleEdit(driver)} className="hover:bg-amber-50 hover:text-amber-700">
                                 <Edit className="w-4 h-4" />
                               </Button>
-                              <Button size="sm" variant="ghost" onClick={() => handleDelete(driver.id)} className="text-red-500 hover:bg-red-50 hover:text-red-600 transition-all duration-300 hover:scale-110">
+                              <Button size="sm" variant="ghost" onClick={() => handleDelete(driver.id)} className="text-red-500 hover:bg-red-50 hover:text-red-600">
                                 <Trash2 className="w-4 h-4" />
                               </Button>
                             </div>
