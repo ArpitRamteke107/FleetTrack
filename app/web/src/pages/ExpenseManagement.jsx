@@ -134,7 +134,7 @@ const ExpenseManagement = () => {
         <div className="absolute inset-0 bg-gradient-to-br from-amber-50/80 via-stone-50 to-orange-50/50 pointer-events-none" />
         <div className="absolute top-0 right-0 -mt-20 -mr-20 w-96 h-96 bg-amber-300/15 rounded-full blur-[100px] pointer-events-none" />
         <div className="absolute bottom-0 left-0 -mb-20 -ml-20 w-96 h-96 bg-orange-300/15 rounded-full blur-[100px] pointer-events-none" />
-        
+
         <Header className="relative z-20" />
 
         <main className="flex-1 container mx-auto px-4 sm:px-6 lg:px-8 py-8 relative z-10">
@@ -144,8 +144,8 @@ const ExpenseManagement = () => {
               <p className="text-stone-600">Track and manage all fleet expenses</p>
             </div>
 
-            <Button 
-              onClick={() => setShowExpenseForm(true)} 
+            <Button
+              onClick={() => setShowExpenseForm(true)}
               className="gap-2 bg-amber-700 hover:bg-amber-800 text-white"
               disabled={showExpenseForm}
             >
@@ -181,7 +181,7 @@ const ExpenseManagement = () => {
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="vehicle" className="text-stone-700">Vehicle (Optional)</Label>
+                      <Label htmlFor="vehicle" className="text-stone-700">Vehicle</Label>
                       <Select value={formData.vehicle} onValueChange={(value) => handleChange('vehicle', value)}>
                         <SelectTrigger id="vehicle" className="bg-stone-50 border-stone-200 text-stone-900">
                           <SelectValue placeholder="Select vehicle" />
@@ -198,7 +198,7 @@ const ExpenseManagement = () => {
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="driver" className="text-stone-700">Driver (Optional)</Label>
+                      <Label htmlFor="driver" className="text-stone-700">Driver</Label>
                       <Select value={formData.driver} onValueChange={(value) => handleChange('driver', value)}>
                         <SelectTrigger id="driver" className="bg-stone-50 border-stone-200 text-stone-900">
                           <SelectValue placeholder="Select driver" />
@@ -303,7 +303,7 @@ const ExpenseManagement = () => {
                         <TableRow key={expense.id} className="hover:bg-stone-50">
                           <TableCell className="text-stone-600">{new Date(expense.date).toLocaleDateString()}</TableCell>
                           <TableCell>
-                            <Badge 
+                            <Badge
                               variant="outline"
                               className="border-amber-200 bg-amber-50 text-amber-700"
                             >
