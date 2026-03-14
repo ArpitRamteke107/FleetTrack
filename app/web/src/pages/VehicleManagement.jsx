@@ -8,9 +8,9 @@ import { Label } from '../components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/ui/select';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../components/ui/table';
 import { Badge } from '../components/ui/badge';
-import { Plus, Edit, Trash2, UserPlus } from 'lucide-react';
-import Header from '../components/Header.jsx';
-import Footer from '../components/Footer.jsx';
+import { Edit, Trash2, UserPlus } from 'lucide-react';
+import DashboardLayout from '../components/DashboardLayout.jsx';
+import FloatingAddButton from '../components/FloatingAddButton.jsx';
 import { toast } from 'sonner';
 
 
@@ -194,30 +194,18 @@ const VehicleManagement = () => {
         <meta name="description" content="Manage your fleet vehicles, assignments, and maintenance records." />
       </Helmet>
 
-      <div className="min-h-screen flex flex-col bg-stone-100 relative overflow-hidden">
-        {/* Background Gradients */}
-        <div className="absolute inset-0 bg-gradient-to-br from-amber-50/80 via-stone-50 to-orange-50/50 pointer-events-none" />
-        <div className="absolute top-0 right-0 -mt-20 -mr-20 w-96 h-96 bg-amber-300/15 rounded-full blur-[100px] pointer-events-none" />
-        <div className="absolute bottom-0 left-0 -mb-20 -ml-20 w-96 h-96 bg-orange-300/15 rounded-full blur-[100px] pointer-events-none" />
-        
-        <Header className="relative z-20" />
+      <DashboardLayout>
+        <div className="min-h-screen relative overflow-hidden">
+          {/* Background Gradients */}
+          <div className="absolute inset-0 bg-gradient-to-br from-amber-50/80 via-stone-50 to-orange-50/50 pointer-events-none" />
+          <div className="absolute top-0 right-0 -mt-20 -mr-20 w-96 h-96 bg-amber-300/15 rounded-full blur-[100px] pointer-events-none" />
+          <div className="absolute bottom-0 left-0 -mb-20 -ml-20 w-96 h-96 bg-orange-300/15 rounded-full blur-[100px] pointer-events-none" />
 
-        <main className="flex-1 container mx-auto px-4 sm:px-6 lg:px-8 py-8 relative z-10">
-          <div className="flex items-center justify-between mb-8">
-            <div>
+          <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 relative z-10">
+            <div className="mb-8">
               <h1 className="text-3xl font-bold mb-2 text-amber-900">Vehicles</h1>
               <p className="text-stone-600">Manage your fleet vehicles and assignments</p>
             </div>
-
-            <Button 
-              onClick={() => setShowVehicleForm(true)} 
-              className="gap-2 bg-amber-700 hover:bg-amber-800 text-white"
-              disabled={showVehicleForm}
-            >
-              <Plus className="w-4 h-4" />
-              Add Vehicle
-            </Button>
-          </div>
 
           {/* Inline Add/Edit Vehicle Form */}
           {showVehicleForm && (
@@ -472,10 +460,15 @@ const VehicleManagement = () => {
               )}
             </CardContent>
           </Card>
-        </main>
+          </main>
 
-        <Footer />
-      </div>
+          {/* Floating Add Button */}
+          <FloatingAddButton 
+            onClick={() => setShowVehicleForm(true)} 
+            disabled={showVehicleForm}
+          />
+        </div>
+      </DashboardLayout>
     </>
   );
 };
