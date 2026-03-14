@@ -8,27 +8,56 @@ import { Badge } from './ui/badge';
 import { motion } from 'framer-motion';
 import { Truck, User, LogOut, Menu, Home, Activity, Car, Users, Map, FileText, IndianRupee, PieChart, Info, ChevronRight, Droplet, Fuel } from 'lucide-react';
 
-// Simple 2D Truck Wheel SVG Component
+// Simple 2D Truck Wheel SVG Component - Brighter colors
 const TruckWheel = ({ className }) => (
   <svg viewBox="0 0 100 100" className={className}>
-    {/* Outer tire - black rubber */}
-    <circle cx="50" cy="50" r="48" fill="#1a1a1a"/>
+    {/* Outer tire - dark gray rubber */}
+    <circle cx="50" cy="50" r="48" fill="#2d2d2d"/>
     {/* Tire tread pattern */}
-    <circle cx="50" cy="50" r="42" fill="none" stroke="#333" strokeWidth="4" strokeDasharray="8 4"/>
-    {/* Wheel rim - silver/gray */}
-    <circle cx="50" cy="50" r="30" fill="#4a4a4a"/>
+    <circle cx="50" cy="50" r="42" fill="none" stroke="#4a4a4a" strokeWidth="4" strokeDasharray="8 4"/>
+    {/* Wheel rim - bright silver */}
+    <circle cx="50" cy="50" r="30" fill="#a0a0a0"/>
     {/* Inner rim highlight */}
-    <circle cx="50" cy="50" r="24" fill="#5a5a5a"/>
+    <circle cx="50" cy="50" r="24" fill="#c0c0c0"/>
     {/* Hub center */}
-    <circle cx="50" cy="50" r="14" fill="#3a3a3a"/>
-    {/* Center cap */}
-    <circle cx="50" cy="50" r="8" fill="#2a2a2a"/>
-    {/* Spokes - 5 spoke design */}
-    <line x1="50" y1="20" x2="50" y2="36" stroke="#3a3a3a" strokeWidth="8" strokeLinecap="round"/>
-    <line x1="78" y1="41" x2="64" y2="46" stroke="#3a3a3a" strokeWidth="8" strokeLinecap="round"/>
-    <line x1="68" y1="74" x2="58" y2="62" stroke="#3a3a3a" strokeWidth="8" strokeLinecap="round"/>
-    <line x1="32" y1="74" x2="42" y2="62" stroke="#3a3a3a" strokeWidth="8" strokeLinecap="round"/>
-    <line x1="22" y1="41" x2="36" y2="46" stroke="#3a3a3a" strokeWidth="8" strokeLinecap="round"/>
+    <circle cx="50" cy="50" r="14" fill="#888"/>
+    {/* Center cap - amber accent */}
+    <circle cx="50" cy="50" r="8" fill="#b45309"/>
+    {/* Spokes - 5 spoke design with brighter color */}
+    <line x1="50" y1="20" x2="50" y2="36" stroke="#707070" strokeWidth="8" strokeLinecap="round"/>
+    <line x1="78" y1="41" x2="64" y2="46" stroke="#707070" strokeWidth="8" strokeLinecap="round"/>
+    <line x1="68" y1="74" x2="58" y2="62" stroke="#707070" strokeWidth="8" strokeLinecap="round"/>
+    <line x1="32" y1="74" x2="42" y2="62" stroke="#707070" strokeWidth="8" strokeLinecap="round"/>
+    <line x1="22" y1="41" x2="36" y2="46" stroke="#707070" strokeWidth="8" strokeLinecap="round"/>
+  </svg>
+);
+
+// Professional FleetTrack Logo SVG
+const FleetTrackLogo = ({ className }) => (
+  <svg viewBox="0 0 40 40" className={className} fill="none">
+    {/* Background circle with gradient effect */}
+    <circle cx="20" cy="20" r="19" fill="url(#logoGradient)" />
+    {/* Road/path element */}
+    <path d="M6 26 Q20 18 34 26" stroke="#fef3c7" strokeWidth="3" strokeLinecap="round" fill="none" />
+    <path d="M6 26 Q20 18 34 26" stroke="#fbbf24" strokeWidth="1.5" strokeLinecap="round" fill="none" strokeDasharray="4 3" />
+    {/* Stylized truck silhouette */}
+    <rect x="12" y="14" width="14" height="8" rx="1.5" fill="#fef3c7" />
+    <rect x="8" y="17" width="6" height="5" rx="1" fill="#fef3c7" />
+    {/* Cab window */}
+    <rect x="9" y="18" width="4" height="3" rx="0.5" fill="#78350f" />
+    {/* Wheels */}
+    <circle cx="13" cy="22" r="2.5" fill="#292524" stroke="#a8a29e" strokeWidth="1" />
+    <circle cx="23" cy="22" r="2.5" fill="#292524" stroke="#a8a29e" strokeWidth="1" />
+    {/* Location pin accent */}
+    <path d="M30 10 C30 6 34 6 34 10 C34 12 32 14 32 14 C32 14 30 12 30 10 Z" fill="#fbbf24" />
+    <circle cx="32" cy="10" r="1.5" fill="#78350f" />
+    {/* Gradient definition */}
+    <defs>
+      <linearGradient id="logoGradient" x1="0" y1="0" x2="40" y2="40">
+        <stop offset="0%" stopColor="#78350f" />
+        <stop offset="100%" stopColor="#92400e" />
+      </linearGradient>
+    </defs>
   </svg>
 );
 
@@ -104,7 +133,7 @@ const Header = () => {
             left: `${(navLinks.findIndex(link => link.to === location.pathname) / navLinks.length) * 100 + (50 / navLinks.length)}%`,
             x: "-50%"
           }}
-          transition={{ type: "spring", stiffness: 80, damping: 15, mass: 1 }}
+          transition={{ type: "tween", duration: 0.5, ease: "easeInOut" }}
         >
           <motion.div
             animate={{ rotate: 360 }}
@@ -154,11 +183,9 @@ const Header = () => {
               </Sheet>
             )}
 
-            <Link to="/" className="flex items-center gap-2 transition-transform hover:scale-110 hover:rotate-1 duration-300 z-10">
-              <div className="w-9 h-9 bg-gradient-to-br from-amber-700 to-amber-900 rounded-xl flex items-center justify-center shadow-sm">
-                <Truck className="w-5 h-5 text-stone-100" />
-              </div>
-              <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-amber-900 to-stone-700 hidden xl:inline-block">Fleet Tracker</span>
+            <Link to="/" className="flex items-center gap-2.5 transition-transform hover:scale-105 duration-300 z-10">
+              <FleetTrackLogo className="w-10 h-10 drop-shadow-md" />
+              <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-amber-800 to-amber-950 hidden xl:inline-block">FleetTrack</span>
             </Link>
 
             {/* Desktop Top Navigation with Rolling Wheel */}
