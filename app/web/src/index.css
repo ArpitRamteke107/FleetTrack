@@ -7,8 +7,8 @@
 body {
   font-family: "DM Sans", sans-serif;
   overflow-x: clip;
-  background-color: #fdf2f8;
-  background-image: linear-gradient(135deg, #fdf2f8 0%, #f0f9ff 50%, #faf5ff 100%);
+  background-color: #faf8f5;
+  background-image: linear-gradient(135deg, #faf8f5 0%, #f5f0e8 50%, #faf5f0 100%);
   background-attachment: fixed;
 }
 
@@ -18,42 +18,42 @@ html {
 
 @layer base {
   :root {
-    --background: 327 73% 97%; /* rose-50 */
-    --foreground: 222 47% 20%;
+    --background: 35 30% 97%; /* warm off-white */
+    --foreground: 25 30% 15%;
     
-    /* Soft Sky Blue */
-    --primary: 199 89% 70%; 
-    --primary-foreground: 222 47% 15%;
+    /* Warm Brown */
+    --primary: 25 50% 35%; 
+    --primary-foreground: 35 30% 97%;
     
-    --secondary: 270 67% 94%; /* violet-100 */
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 35 25% 92%; /* warm cream */
+    --secondary-foreground: 25 30% 15%;
     
-    --destructive: 0 72% 75%; /* pastel red */
+    --destructive: 0 55% 60%; /* muted red */
     --destructive-foreground: 0 0% 100%;
     
-    --success: 158 64% 72%; /* pastel emerald */
-    --success-foreground: 158 64% 20%;
+    --success: 145 45% 55%; /* sage green */
+    --success-foreground: 145 45% 15%;
     
-    /* Soft Rose Accent */
-    --warning: 350 80% 80%;
-    --warning-foreground: 350 80% 25%;
+    /* Warm Amber Warning */
+    --warning: 38 70% 60%;
+    --warning-foreground: 38 70% 15%;
     
-    --muted: 199 89% 94%; /* sky-100 */
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 35 20% 92%; /* warm stone */
+    --muted-foreground: 25 15% 45%;
     
-    /* Soft Violet Accent */
-    --accent: 270 67% 75%;
-    --accent-foreground: 270 67% 20%;
+    /* Warm Brown Accent */
+    --accent: 25 40% 45%;
+    --accent-foreground: 35 30% 97%;
     
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 47.4% 11.2%;
+    --card: 35 30% 99%;
+    --card-foreground: 25 30% 15%;
     
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 47.4% 11.2%;
+    --popover: 35 30% 99%;
+    --popover-foreground: 25 30% 15%;
     
-    --border: 327 73% 90%; /* rose-200 */
-    --input: 199 89% 92%; /* sky-100 */
-    --ring: 199 89% 70%;
+    --border: 35 25% 88%; /* warm stone border */
+    --input: 35 25% 94%; /* warm input */
+    --ring: 25 50% 35%;
     
     --radius: 0.75rem;
   }

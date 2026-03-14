@@ -121,7 +121,7 @@ const DriverDashboard = () => {
           <Skeleton className="h-8 w-48 mb-8" />
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[1, 2, 3].map(i => (
-              <Card key={i} className="bg-white/80 backdrop-blur-sm border-blue-100/50 shadow-sm">
+              <Card key={i} className="bg-white/80 backdrop-blur-sm border-stone-200 hover:border-amber-300 shadow-sm">
                 <CardHeader>
                   <Skeleton className="h-4 w-24" />
                 </CardHeader>
@@ -144,11 +144,11 @@ const DriverDashboard = () => {
         <meta name="description" content="Driver dashboard with assigned vehicle, trip history, and fuel records." />
       </Helmet>
       
-      <div className="min-h-screen flex flex-col bg-slate-50 relative overflow-hidden">
+      <div className="min-h-screen flex flex-col bg-stone-50 relative overflow-hidden">
         {/* Background Gradients */}
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-50/80 via-white to-indigo-50/80 pointer-events-none" />
-        <div className="absolute top-0 right-0 -mt-20 -mr-20 w-96 h-96 bg-blue-400/10 rounded-full blur-[100px] pointer-events-none" />
-        <div className="absolute bottom-0 left-0 -mb-20 -ml-20 w-96 h-96 bg-indigo-500/10 rounded-full blur-[100px] pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-br from-amber-50/80 via-stone-50 to-orange-50/50 pointer-events-none" />
+        <div className="absolute top-0 right-0 -mt-20 -mr-20 w-96 h-96 bg-amber-300/15 rounded-full blur-[100px] pointer-events-none" />
+        <div className="absolute bottom-0 left-0 -mb-20 -ml-20 w-96 h-96 bg-orange-300/15 rounded-full blur-[100px] pointer-events-none" />
         
         <Header className="relative z-20" />
         
@@ -158,7 +158,7 @@ const DriverDashboard = () => {
             <p className="text-muted-foreground">Welcome back, {currentUser.name}</p>
           </div>
 
-          <Card className="mb-8 bg-white/80 backdrop-blur-sm border-blue-200 shadow-md">
+          <Card className="mb-8 bg-white/80 backdrop-blur-sm border-amber-200 shadow-md">
             <CardHeader className="flex flex-row items-center justify-between">
               <CardTitle className="flex items-center gap-2 text-primary">
                 <MapPin className="w-5 h-5" />
@@ -175,7 +175,7 @@ const DriverDashboard = () => {
           </Card>
 
           {assignedVehicle && (
-            <Card className="mb-8 bg-white/80 backdrop-blur-sm border-blue-200 shadow-md">
+            <Card className="mb-8 bg-white/80 backdrop-blur-sm border-amber-200 shadow-md">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2 text-primary">
                   <Truck className="w-5 h-5" />
@@ -208,7 +208,7 @@ const DriverDashboard = () => {
           )}
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-            <Card className="hover:shadow-lg transition-all duration-300 bg-white/80 backdrop-blur-sm border-blue-100/50">
+            <Card className="hover:shadow-lg transition-all duration-300 bg-white/80 backdrop-blur-sm border-stone-200 hover:border-amber-300">
               <CardHeader className="flex flex-row items-center justify-between pb-2">
                 <CardTitle className="text-sm font-medium text-muted-foreground">Total Trips</CardTitle>
                 <Package className="w-5 h-5 text-primary" />
@@ -219,7 +219,7 @@ const DriverDashboard = () => {
               </CardContent>
             </Card>
 
-            <Card className="hover:shadow-lg transition-all duration-300 bg-white/80 backdrop-blur-sm border-blue-100/50">
+            <Card className="hover:shadow-lg transition-all duration-300 bg-white/80 backdrop-blur-sm border-stone-200 hover:border-amber-300">
               <CardHeader className="flex flex-row items-center justify-between pb-2">
                 <CardTitle className="text-sm font-medium text-muted-foreground">Material Delivered</CardTitle>
                 <TrendingUp className="w-5 h-5 text-primary" />
@@ -230,7 +230,7 @@ const DriverDashboard = () => {
               </CardContent>
             </Card>
 
-            <Card className="hover:shadow-lg transition-all duration-300 bg-white/80 backdrop-blur-sm border-blue-100/50">
+            <Card className="hover:shadow-lg transition-all duration-300 bg-white/80 backdrop-blur-sm border-stone-200 hover:border-amber-300">
               <CardHeader className="flex flex-row items-center justify-between pb-2">
                 <CardTitle className="text-sm font-medium text-muted-foreground">Fuel Efficiency</CardTitle>
                 <Fuel className="w-5 h-5 text-primary" />
@@ -258,7 +258,7 @@ const DriverDashboard = () => {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-            <Card className="bg-white/80 backdrop-blur-sm border-blue-100/50 shadow-sm">
+            <Card className="bg-white/80 backdrop-blur-sm border-stone-200 hover:border-amber-300 shadow-sm">
               <CardHeader>
                 <CardTitle>Recent Trips</CardTitle>
               </CardHeader>
@@ -294,7 +294,7 @@ const DriverDashboard = () => {
               </CardContent>
             </Card>
 
-            <Card className="bg-white/80 backdrop-blur-sm border-blue-100/50 shadow-sm">
+            <Card className="bg-white/80 backdrop-blur-sm border-stone-200 hover:border-amber-300 shadow-sm">
               <CardHeader>
                 <CardTitle>Recent Fuel Records</CardTitle>
               </CardHeader>

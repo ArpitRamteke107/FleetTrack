@@ -22,8 +22,8 @@ const HomePage = () => {
     {
       icon: Truck,
       title: 'Vehicle Management',
-      color: 'bg-sky-100',
-      iconColor: 'text-sky-500',
+      color: 'bg-amber-100',
+      iconColor: 'text-amber-700',
       bullets: [
         'Complete vehicle profile & maintenance schedules.',
         'Fuel consumed per Km.',
@@ -33,8 +33,8 @@ const HomePage = () => {
     {
       icon: BarChart3,
       title: 'Trip Analytics',
-      color: 'bg-violet-100',
-      iconColor: 'text-violet-500',
+      color: 'bg-orange-100',
+      iconColor: 'text-orange-600',
       bullets: [
         'Monitor trip performance and revenue.',
         'Breakdown by material type (Sand, Bricks, etc.).',
@@ -43,8 +43,8 @@ const HomePage = () => {
     {
       icon: Users,
       title: 'Driver Management',
-      color: 'bg-emerald-100',
-      iconColor: 'text-emerald-500',
+      color: 'bg-stone-200',
+      iconColor: 'text-stone-700',
       bullets: [
         'Complete driver profile & daily trip logs.',
         'Performance scores.',
@@ -54,8 +54,8 @@ const HomePage = () => {
     {
       icon: Fuel,
       title: 'Fuel Management',
-      color: 'bg-rose-100',
-      iconColor: 'text-rose-400',
+      color: 'bg-amber-200',
+      iconColor: 'text-amber-800',
       bullets: [
         'Log fill-ups via receipt scan.',
         'Calculate cost per trip.',
@@ -86,10 +86,10 @@ const HomePage = () => {
       <main className="flex-1">
 
         {/* ── Hero Section ── */}
-        <section className="relative pt-24 pb-20 lg:pt-32 lg:pb-28 overflow-hidden bg-rose-50/30">
-          <div className="absolute inset-0 bg-gradient-to-br from-rose-50/90 via-sky-50/80 to-violet-50/50" />
-          <div className="absolute top-10 left-10 w-72 h-72 bg-rose-200/30 rounded-full blur-[80px] animate-pulse" />
-          <div className="absolute bottom-10 right-10 w-96 h-96 bg-sky-200/30 rounded-full blur-[100px] animate-pulse" />
+        <section className="relative pt-24 pb-20 lg:pt-32 lg:pb-28 overflow-hidden bg-stone-50">
+          <div className="absolute inset-0 bg-gradient-to-br from-amber-50/90 via-stone-50/80 to-orange-50/50" />
+          <div className="absolute top-10 left-10 w-72 h-72 bg-amber-200/30 rounded-full blur-[80px] animate-pulse" />
+          <div className="absolute bottom-10 right-10 w-96 h-96 bg-orange-200/30 rounded-full blur-[100px] animate-pulse" />
 
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center">
@@ -100,13 +100,13 @@ const HomePage = () => {
                 transition={{ duration: 0.8, ease: 'easeOut' }}
               >
                 <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ delay: 0.2, duration: 0.5 }}>
-                  <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-rose-100 text-rose-600 font-bold text-sm mb-6 border border-rose-200 shadow-sm">
+                  <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-100 text-amber-800 font-bold text-sm mb-6 border border-amber-200 shadow-sm">
                     <Activity className="w-4 h-4" /> Next-Gen Logistics & Tracking
                   </span>
                 </motion.div>
-                <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight mb-6 tracking-tight text-slate-800">
+                <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight mb-6 tracking-tight text-stone-800">
                   Manage your fleet with{' '}
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-rose-400 via-sky-500 to-violet-500">
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-600 via-orange-500 to-amber-800">
                     precision & intelligence
                   </span>
                 </h1>
@@ -115,13 +115,13 @@ const HomePage = () => {
                 </p>
                 <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
                   <Link to="/signup">
-                    <Button size="lg" className="h-14 px-8 text-lg gap-2 group bg-gradient-to-r from-sky-400 to-violet-400 hover:from-sky-500 hover:to-violet-500 shadow-lg shadow-sky-400/30 border-0 transition-all duration-300 text-white rounded-full">
+                    <Button size="lg" className="h-14 px-8 text-lg gap-2 group bg-gradient-to-r from-amber-700 to-amber-900 hover:from-amber-800 hover:to-amber-950 shadow-lg shadow-amber-700/30 border-0 transition-all duration-300 text-stone-100 rounded-full hover:scale-105">
                       Start Tracking
                       <ArrowRight className="w-5 h-5 group-hover:translate-x-1.5 transition-transform duration-300" />
                     </Button>
                   </Link>
                   <Link to="/login">
-                    <Button size="lg" variant="outline" className="h-14 px-8 text-lg border-rose-200 text-slate-700 hover:bg-rose-50 hover:text-rose-600 transition-colors duration-300 bg-white shadow-sm rounded-full">
+                    <Button size="lg" variant="outline" className="h-14 px-8 text-lg border-amber-200 text-stone-700 hover:bg-amber-50 hover:text-amber-800 transition-all duration-300 bg-white shadow-sm rounded-full hover:scale-105 hover:shadow-md">
                       Provider Login
                     </Button>
                   </Link>
@@ -136,34 +136,34 @@ const HomePage = () => {
               >
                 <div className="relative">
                   {/* Abstract decorative elements instead of image */}
-                  <div className="w-80 h-80 rounded-3xl bg-gradient-to-br from-rose-100 via-sky-100 to-violet-100 shadow-2xl flex items-center justify-center">
-                    <div className="w-64 h-64 rounded-2xl bg-white/80 backdrop-blur-sm shadow-lg flex flex-col items-center justify-center gap-4 p-6">
-                      <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-sky-200 to-sky-300 flex items-center justify-center">
-                        <Truck className="w-8 h-8 text-sky-700" />
+                  <div className="w-80 h-80 rounded-3xl bg-gradient-to-br from-amber-100 via-orange-50 to-stone-100 shadow-2xl flex items-center justify-center">
+                    <div className="w-64 h-64 rounded-2xl bg-white/80 backdrop-blur-sm shadow-lg flex flex-col items-center justify-center gap-4 p-6 hover:scale-105 transition-transform duration-300">
+                      <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-amber-200 to-amber-300 flex items-center justify-center">
+                        <Truck className="w-8 h-8 text-amber-800" />
                       </div>
                       <div className="text-center">
-                        <p className="text-lg font-bold text-slate-700">Fleet Dashboard</p>
-                        <p className="text-sm text-slate-500">Real-time tracking</p>
+                        <p className="text-lg font-bold text-stone-700">Fleet Dashboard</p>
+                        <p className="text-sm text-stone-500">Real-time tracking</p>
                       </div>
                       <div className="flex gap-2 mt-2">
-                        <div className="w-3 h-3 rounded-full bg-emerald-300 animate-pulse" />
-                        <div className="w-3 h-3 rounded-full bg-amber-300 animate-pulse delay-100" />
-                        <div className="w-3 h-3 rounded-full bg-rose-300 animate-pulse delay-200" />
+                        <div className="w-3 h-3 rounded-full bg-emerald-400 animate-pulse" />
+                        <div className="w-3 h-3 rounded-full bg-amber-400 animate-pulse delay-100" />
+                        <div className="w-3 h-3 rounded-full bg-orange-400 animate-pulse delay-200" />
                       </div>
                     </div>
                   </div>
                   <motion.div
-                    className="absolute -bottom-6 -left-6 bg-white p-4 rounded-2xl shadow-xl border border-rose-100 flex items-center gap-4"
+                    className="absolute -bottom-6 -left-6 bg-white p-4 rounded-2xl shadow-xl border border-amber-200 flex items-center gap-4 hover:shadow-2xl hover:scale-105 transition-all duration-300"
                     initial={{ y: 20, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
                     transition={{ delay: 0.8, type: 'spring' }}
                   >
                     <div className="w-12 h-12 rounded-full bg-emerald-100 flex items-center justify-center">
-                      <ShieldCheck className="w-6 h-6 text-emerald-500" />
+                      <ShieldCheck className="w-6 h-6 text-emerald-600" />
                     </div>
                     <div>
-                      <p className="text-sm text-slate-500 font-medium">System Status</p>
-                      <p className="text-lg font-bold text-slate-700">100% Online</p>
+                      <p className="text-sm text-stone-500 font-medium">System Status</p>
+                      <p className="text-lg font-bold text-stone-700">100% Online</p>
                     </div>
                   </motion.div>
                 </div>
@@ -173,7 +173,7 @@ const HomePage = () => {
         </section>
 
         {/* ── Live Dashboard Snapshot / Features Section ── */}
-        <section className="py-20 bg-white">
+        <section className="py-20 bg-stone-50/50">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-4">
               <p className="text-slate-500 text-sm font-semibold uppercase tracking-widest mb-1">Live Dashboard Snapshot</p>
@@ -191,7 +191,7 @@ const HomePage = () => {
             >
               {features.map((feature, i) => (
                 <motion.div key={i} variants={itemVariants}>
-                  <div className="h-full border border-slate-200 rounded-2xl p-6 bg-white hover:shadow-lg transition-shadow duration-300 flex flex-col gap-4">
+                  <div className="h-full border border-stone-200 rounded-2xl p-6 bg-white hover:shadow-lg hover:scale-[1.02] hover:border-amber-300 transition-all duration-300 flex flex-col gap-4">
                     <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${feature.color}`}>
                       <feature.icon className={`w-6 h-6 ${feature.iconColor}`} />
                     </div>
@@ -212,7 +212,7 @@ const HomePage = () => {
         </section>
 
         {/* ── Two Logins, One Seamless Workflow ── */}
-        <section className="py-20 bg-gradient-to-b from-white to-sky-50/50">
+        <section className="py-20 bg-gradient-to-b from-stone-50/50 to-amber-50/30">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-14">
               <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 uppercase tracking-wide">
@@ -284,11 +284,11 @@ const HomePage = () => {
           </div>
         </section>
 
-        {/* ── Pastel CTA Banner ── */}
-        <section className="relative overflow-hidden bg-gradient-to-br from-rose-100 via-sky-100 to-violet-100 py-20">
+        {/* ── Warm Pastel CTA Banner ── */}
+        <section className="relative overflow-hidden bg-gradient-to-br from-amber-100 via-orange-50 to-stone-100 py-20">
           {/* Decorative blurred circles */}
-          <div className="absolute top-10 left-10 w-64 h-64 bg-rose-200/50 rounded-full blur-[80px]" />
-          <div className="absolute bottom-10 right-10 w-72 h-72 bg-sky-200/50 rounded-full blur-[100px]" />
+          <div className="absolute top-10 left-10 w-64 h-64 bg-amber-200/50 rounded-full blur-[80px]" />
+          <div className="absolute bottom-10 right-10 w-72 h-72 bg-orange-200/50 rounded-full blur-[100px]" />
 
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
             <motion.div
@@ -297,20 +297,20 @@ const HomePage = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.7 }}
             >
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-700 mb-6 uppercase leading-tight tracking-tight">
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-stone-700 mb-6 uppercase leading-tight tracking-tight">
                 Don't Just Run a Fleet.
                 <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-rose-400 via-sky-500 to-violet-500">Own Your Profitability.</span>
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-600 via-orange-500 to-amber-800">Own Your Profitability.</span>
               </h2>
 
               <Link to="/signup">
-                <button className="mt-2 inline-flex items-center gap-3 px-10 py-4 text-lg font-bold text-white bg-gradient-to-r from-sky-400 to-violet-400 hover:from-sky-500 hover:to-violet-500 rounded-full shadow-lg shadow-sky-400/30 transition-all duration-300 hover:-translate-y-1">
+                <button className="mt-2 inline-flex items-center gap-3 px-10 py-4 text-lg font-bold text-stone-100 bg-gradient-to-r from-amber-700 to-amber-900 hover:from-amber-800 hover:to-amber-950 rounded-full shadow-lg shadow-amber-700/30 transition-all duration-300 hover:-translate-y-1 hover:scale-105">
                   Start Your Free Trial
                   <ArrowRight className="w-5 h-5" />
                 </button>
               </Link>
 
-              <p className="mt-6 text-slate-600 text-sm">
+              <p className="mt-6 text-stone-600 text-sm">
                 Join modern transport businesses using FleetTrack Pro to boost revenue.
               </p>
             </motion.div>

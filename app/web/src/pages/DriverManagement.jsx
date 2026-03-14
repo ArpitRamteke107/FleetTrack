@@ -7,7 +7,8 @@ import { Input } from '../components/ui/input';
 import { Label } from '../components/ui/label';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../components/ui/table';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '../components/ui/dialog';
-import { Plus, Edit, Trash2, MapPin } from 'lucide-react';
+import { Plus, Edit, Trash2, MapPin, Truck, Navigation, ExternalLink } from 'lucide-react';
+import { motion } from 'framer-motion';
 import Header from '../components/Header.jsx';
 import Footer from '../components/Footer.jsx';
 import { toast } from 'sonner';
@@ -130,11 +131,11 @@ const DriverManagement = () => {
         <meta name="description" content="Manage your fleet drivers, assignments, and performance tracking." />
       </Helmet>
       
-      <div className="min-h-screen flex flex-col bg-slate-50 relative overflow-hidden">
+      <div className="min-h-screen flex flex-col bg-stone-50 relative overflow-hidden">
         {/* Background Gradients */}
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-50/80 via-white to-indigo-50/80 pointer-events-none" />
-        <div className="absolute top-0 right-0 -mt-20 -mr-20 w-96 h-96 bg-blue-400/10 rounded-full blur-[100px] pointer-events-none" />
-        <div className="absolute bottom-0 left-0 -mb-20 -ml-20 w-96 h-96 bg-indigo-500/10 rounded-full blur-[100px] pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-br from-amber-50/80 via-stone-50 to-orange-50/50 pointer-events-none" />
+        <div className="absolute top-0 right-0 -mt-20 -mr-20 w-96 h-96 bg-amber-300/15 rounded-full blur-[100px] pointer-events-none" />
+        <div className="absolute bottom-0 left-0 -mb-20 -ml-20 w-96 h-96 bg-orange-300/15 rounded-full blur-[100px] pointer-events-none" />
         
         <Header className="relative z-20" />
         
@@ -150,7 +151,7 @@ const DriverManagement = () => {
               if (!open) resetForm();
             }}>
               <DialogTrigger asChild>
-                <Button className="gap-2">
+                <Button className="gap-2 bg-amber-800 hover:bg-amber-900 text-stone-100 transition-all duration-300 hover:scale-105 hover:shadow-lg">
                   <Plus className="w-4 h-4" />
                   Add Driver
                 </Button>
@@ -240,53 +241,53 @@ const DriverManagement = () => {
             </Dialog>
           </div>
 
-          <Card className="bg-white/80 backdrop-blur-sm border-blue-100/50 shadow-sm">
+          <Card className="bg-white/80 backdrop-blur-sm border-stone-200 shadow-sm hover:shadow-md transition-shadow duration-300">
             <CardHeader>
-              <CardTitle>Fleet Drivers</CardTitle>
+              <CardTitle className="text-amber-900">Fleet Drivers</CardTitle>
             </CardHeader>
             <CardContent>
               {drivers.length > 0 ? (
                 <div className="overflow-x-auto">
                   <Table>
                     <TableHeader>
-                      <TableRow>
-                        <TableHead>Name</TableHead>
-                        <TableHead>Email</TableHead>
-                        <TableHead>Phone</TableHead>
-                        <TableHead>Licence Number</TableHead>
-                        <TableHead>Joining Date</TableHead>
-                        <TableHead>Location</TableHead>
-                        <TableHead>Actions</TableHead>
+                      <TableRow className="hover:bg-amber-50/50">
+                        <TableHead className="text-amber-900">Name</TableHead>
+                        <TableHead className="text-amber-900">Email</TableHead>
+                        <TableHead className="text-amber-900">Phone</TableHead>
+                        <TableHead className="text-amber-900">Licence Number</TableHead>
+                        <TableHead className="text-amber-900">Joining Date</TableHead>
+                        <TableHead className="text-amber-900">Location</TableHead>
+                        <TableHead className="text-amber-900">Actions</TableHead>
                       </TableRow>
                     </TableHeader>
                     <TableBody>
                       {drivers.map((driver) => (
-                        <TableRow key={driver.id}>
-                          <TableCell className="font-medium">{driver.name || 'N/A'}</TableCell>
-                          <TableCell>{driver.email}</TableCell>
-                          <TableCell>{driver.phone || 'N/A'}</TableCell>
-                          <TableCell>{driver.licence_number || 'N/A'}</TableCell>
-                          <TableCell>{driver.joining_date ? new Date(driver.joining_date).toLocaleDateString() : 'N/A'}</TableCell>
+                        <TableRow key={driver.id} className="hover:bg-amber-50/50 transition-colors duration-200">
+                          <TableCell className="font-medium text-stone-800">{driver.name || 'N/A'}</TableCell>
+                          <TableCell className="text-stone-600">{driver.email}</TableCell>
+                          <TableCell className="text-stone-600">{driver.phone || 'N/A'}</TableCell>
+                          <TableCell className="text-stone-600">{driver.licence_number || 'N/A'}</TableCell>
+                          <TableCell className="text-stone-600">{driver.joining_date ? new Date(driver.joining_date).toLocaleDateString() : 'N/A'}</TableCell>
                           <TableCell>
                             {driver.latitude && driver.longitude ? (
                               <a 
                                 href={`https://www.google.com/maps?q=${driver.latitude},${driver.longitude}`} 
                                 target="_blank" 
                                 rel="noopener noreferrer"
-                                className="text-primary hover:underline flex items-center gap-1 text-sm font-medium"
+                                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-amber-100 text-amber-800 hover:bg-amber-200 transition-all duration-300 text-sm font-medium hover:scale-105"
                               >
-                                <MapPin className="w-3 h-3" /> View Map
+                                <Navigation className="w-3 h-3" /> View Location
                               </a>
                             ) : (
-                              <span className="text-muted-foreground text-xs">Not tracking</span>
+                              <span className="text-stone-400 text-xs italic">Not tracking</span>
                             )}
                           </TableCell>
                           <TableCell>
                             <div className="flex items-center gap-2">
-                              <Button size="sm" variant="ghost" onClick={() => handleEdit(driver)}>
+                              <Button size="sm" variant="ghost" onClick={() => handleEdit(driver)} className="hover:bg-amber-100 hover:text-amber-900 transition-all duration-300 hover:scale-110">
                                 <Edit className="w-4 h-4" />
                               </Button>
-                              <Button size="sm" variant="ghost" onClick={() => handleDelete(driver.id)} className="text-destructive">
+                              <Button size="sm" variant="ghost" onClick={() => handleDelete(driver.id)} className="text-red-500 hover:bg-red-50 hover:text-red-600 transition-all duration-300 hover:scale-110">
                                 <Trash2 className="w-4 h-4" />
                               </Button>
                             </div>
@@ -297,10 +298,121 @@ const DriverManagement = () => {
                   </Table>
                 </div>
               ) : (
-                <p className="text-center text-muted-foreground py-8">No drivers added yet</p>
+                <p className="text-center text-stone-400 py-8">No drivers added yet</p>
               )}
             </CardContent>
           </Card>
+
+          {/* Journey Tracker Section */}
+          {drivers.length > 0 && (
+            <Card className="mt-8 bg-white/80 backdrop-blur-sm border-stone-200 shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden">
+              <CardHeader className="bg-gradient-to-r from-amber-50 to-orange-50 border-b border-stone-200">
+                <CardTitle className="text-amber-900 flex items-center gap-2">
+                  <Navigation className="w-5 h-5" />
+                  Live Journey Tracker
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="p-6">
+                {drivers.filter(d => d.latitude && d.longitude).length > 0 ? (
+                  <div className="space-y-6">
+                    {drivers.filter(d => d.latitude && d.longitude).map((driver, index) => {
+                      // Simulate journey progress (in real app, this would come from backend)
+                      const journeyProgress = Math.random() * 100;
+                      const distanceCovered = (journeyProgress * 1.5).toFixed(1); // Simulated km
+                      
+                      return (
+                        <div key={driver.id} className="bg-stone-50/80 rounded-xl p-4 border border-stone-200 hover:border-amber-300 transition-all duration-300">
+                          <div className="flex items-center justify-between mb-3">
+                            <div className="flex items-center gap-3">
+                              <div className="w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center">
+                                <span className="font-bold text-amber-800">
+                                  {driver.name ? driver.name.charAt(0).toUpperCase() : 'D'}
+                                </span>
+                              </div>
+                              <div>
+                                <p className="font-semibold text-stone-800">{driver.name || 'Unknown Driver'}</p>
+                                <p className="text-xs text-stone-500">Last updated: {driver.last_location_update ? new Date(driver.last_location_update).toLocaleTimeString() : 'N/A'}</p>
+                              </div>
+                            </div>
+                            <div className="flex items-center gap-3">
+                              <div className="text-right">
+                                <p className="text-sm text-stone-500">Distance Covered</p>
+                                <p className="text-lg font-bold text-amber-800">{distanceCovered} km</p>
+                              </div>
+                              <a 
+                                href={`https://www.google.com/maps?q=${driver.latitude},${driver.longitude}`} 
+                                target="_blank" 
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-amber-800 text-stone-100 hover:bg-amber-900 transition-all duration-300 text-sm font-medium hover:scale-105 hover:shadow-lg"
+                              >
+                                <MapPin className="w-4 h-4" />
+                                View Location
+                                <ExternalLink className="w-3 h-3" />
+                              </a>
+                            </div>
+                          </div>
+                          
+                          {/* Journey Progress Bar with Animated Truck */}
+                          <div className="relative mt-4">
+                            {/* Route Line */}
+                            <div className="h-3 bg-stone-200 rounded-full overflow-hidden">
+                              <motion.div 
+                                className="h-full bg-gradient-to-r from-amber-400 to-amber-600 rounded-full"
+                                initial={{ width: 0 }}
+                                animate={{ width: `${journeyProgress}%` }}
+                                transition={{ duration: 1.5, ease: "easeOut" }}
+                              />
+                            </div>
+                            
+                            {/* Start Point */}
+                            <div className="absolute -top-1 left-0 w-5 h-5 rounded-full bg-green-500 border-2 border-white shadow-md flex items-center justify-center">
+                              <span className="text-[8px] text-white font-bold">A</span>
+                            </div>
+                            
+                            {/* End Point */}
+                            <div className="absolute -top-1 right-0 w-5 h-5 rounded-full bg-red-500 border-2 border-white shadow-md flex items-center justify-center">
+                              <span className="text-[8px] text-white font-bold">B</span>
+                            </div>
+                            
+                            {/* Animated Truck */}
+                            <motion.div 
+                              className="absolute -top-3 transform -translate-x-1/2"
+                              initial={{ left: "0%" }}
+                              animate={{ left: `${journeyProgress}%` }}
+                              transition={{ duration: 1.5, ease: "easeOut" }}
+                            >
+                              <motion.div
+                                animate={{ y: [0, -2, 0] }}
+                                transition={{ duration: 0.5, repeat: Infinity, ease: "easeInOut" }}
+                                className="bg-amber-800 p-1.5 rounded-lg shadow-lg"
+                              >
+                                <Truck className="w-5 h-5 text-white" />
+                              </motion.div>
+                            </motion.div>
+                          </div>
+                          
+                          {/* Progress Percentage */}
+                          <div className="flex justify-between mt-3 text-xs text-stone-500">
+                            <span>Start Point</span>
+                            <span className="font-semibold text-amber-700">{journeyProgress.toFixed(0)}% Complete</span>
+                            <span>Destination</span>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                ) : (
+                  <div className="text-center py-12">
+                    <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-stone-100 flex items-center justify-center">
+                      <Navigation className="w-8 h-8 text-stone-400" />
+                    </div>
+                    <p className="text-stone-500 mb-2">No active tracking</p>
+                    <p className="text-sm text-stone-400">Drivers need to enable location sharing to appear here</p>
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+          )}
         </main>
         
         <Footer />
